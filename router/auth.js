@@ -8,10 +8,10 @@ const app = express()
 app.use(express.json())
 
 /** load function authentcation from auth's controller */
-const {authenticate} = require(`../controllers/auth.controller`)
+const {authenticate,getUser} = require(`../controllers/auth.controller`)
 
 /** create route for authentication */
 app.post('/', authenticate)
-
+app.get('/getuserdata',getUser)
 /** export app in order to load in another file */
 module.exports = app

@@ -5,8 +5,5 @@ router.use(express.json())
 router.use(express.urlencoded({extended:true}))
 const {authorizeAdmin,authorizePetugas} = require(`../controllers/auth.controller`)
 router.use(authorizeAdmin)
-
 router.post('/save',transController.save)
-
-
 module.exports = router

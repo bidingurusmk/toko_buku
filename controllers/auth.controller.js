@@ -102,6 +102,22 @@ const getUserLogin = (token)=>{
         return user
     }
 }
+const getUser = (request, response)=>{
+    if (request.headers && request.headers.authorization) {
+        let secret = `mokleters`
+        var authorization = request.headers.authorization.split(' ')[1],
+            decoded;
+        try {
+            decoded = jwt.verify(authorization, secret);
+        } catch (e) {
+            return res.status(401).send('unauthorized');
+        }
+        let user = decoded;
+        return response.json({
+            data:user
+        }) 
+    }
+}
 /** create function authroize */
 const authorizePetugas = (request, response, next) => {
     /** get "Authorization" value from request's header */
@@ -136,4 +152,4 @@ const authorizePetugas = (request, response, next) => {
         }
     })
 }
-module.exports = { authenticate, authorizeAdmin, authorizePetugas, getUserLogin }
+module.exports = { authenticate, authorizeAdmin, authorizePetugas, getUserLogin,getUser }
